@@ -84,6 +84,7 @@ const Payment = () => {
           userEmail: user?.email,
           userName: user?.displayName,
           address,
+          status: "pending",
         };
         // To save payment information
         try {
