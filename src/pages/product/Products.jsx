@@ -3,12 +3,16 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { FormContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-
+import Swal from "sweetalert2";
+import useAllProduct from "../../hooks/useAllProduct";
+import Loading from './../../components/Loading';
 const Products = () => {
-    const { user } = useContext(FormContext)
-    const navigate = useNavigate()
+  const { user } = useContext(FormContext);
+  const [product, refetch] = useAllProduct()
+
+  const navigate = useNavigate();
   // Fetch data from API using the "products" queryKey and the queryFn function
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
       const response = await axios.get(`${import.meta.env.VITE_URL}/products`);
@@ -16,15 +20,35 @@ const Products = () => {
     },
   });
 
+  // if loading
+  if (isLoading) {
+    return <Loading/>;
+  }
   // add to cart list
 
-    const handleCart = (item) => {
-        if (!user) {
-            navigate("/login", { state: { from: "/products" } });
-            return;
+  const handleCart = (item) => {
+    if (!user) {
+      navigate("/login", { state: { from: "/products" } });
+      return;
+    }
+
+    const data = { item, userEmail: user?.email };
+
+    // sent the product to the databse
+    axios
+      .post(`${import.meta.env.VITE_URL}/order`, data)
+      .then((res) => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            title: "Product Added Sucessfully!",
+            icon: "success",
+          });
+          refetch();
         }
-        const data = { item, userEmail: user?.email }
-        console.log(data)
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <div>
