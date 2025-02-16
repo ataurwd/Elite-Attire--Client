@@ -7,6 +7,12 @@ import Register from "../users/Register";
 import Home from "../pages/home/Home";
 import Products from "../pages/product/Products";
 import Cart from "../pages/Cart";
+import Dashoboard from "../layout/Dashoboard";
+import ManageOrder from "../dashboard/admin/ManageOrder";
+import ManageProduct from './../dashboard/admin/ManageProduct';
+import ViewCustomer from './../dashboard/admin/ViewCustomer';
+import ManageProfile from './../dashboard/user/ManageProfile';
+import OrderHistory from './../dashboard/user/OrderHistory';
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -36,6 +42,32 @@ const Routes = () => {
         }
       ],
     },
+    {
+      path: 'dashboard',
+      element: <Dashoboard />,
+      children: [
+        {
+          path: 'mange-order',
+          element: <ManageOrder/>,
+        },
+        {
+          path: 'manage-product',
+          element: <ManageProduct/>,
+        },
+        {
+          path: 'view-customer',
+          element: <ViewCustomer/>,
+        },
+        {
+          path: 'manage-profile',
+          element: <ManageProfile/>,
+        },
+        {
+          path: 'order-hoistory',
+          element: <OrderHistory/>,
+        },
+      ]
+    }
   ]);
   return <RouterProvider router={route} />;
 };
