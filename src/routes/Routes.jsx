@@ -47,7 +47,7 @@ const Routes = () => {
       element: <Dashoboard />,
       children: [
         {
-          path: 'mange-order',
+          path: 'manage-order',
           element: <ManageOrder/>,
         },
         {

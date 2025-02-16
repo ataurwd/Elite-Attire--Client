@@ -13,7 +13,7 @@ const Dashoboard = () => {
     return;
   }
   return (
-    <div>
+    <div className="flex">
       <div
         className={`${
           isCollapsed ? "md:w-16 w-10" : "md:w-72 w-20 px-3"
@@ -38,7 +38,7 @@ const Dashoboard = () => {
         {loginUser.role === "admin" ? (
           <>
             <NavLink
-              to={"mange-order"}
+              to={"manage-product"}
               className={({ isActive }) =>
                 `flex bg-white my-2 p-3 rounded-md items-center ${
                   isActive ? "text-primary" : "text-black"
@@ -54,7 +54,7 @@ const Dashoboard = () => {
               </span>
             </NavLink>
             <NavLink
-              to={"manage-product"}
+              to={"manage-order"}
               className={({ isActive }) =>
                 `flex bg-white my-2 p-3 rounded-md items-center ${
                   isActive ? "text-primary" : "text-black"
@@ -122,6 +122,24 @@ const Dashoboard = () => {
             </NavLink>
           </>
         )}
+
+        {/* back home  */}
+        <NavLink
+              to={"/"}
+              className={({ isActive }) =>
+                `flex bg-white my-2 p-3 rounded-md items-center ${
+                  isActive ? "text-primary" : "text-black"
+                } ${isCollapsed ? "justify-center" : "md:ml-5"}`
+              }
+            >
+              <CgProfile
+                className={`${isCollapsed ? "" : "md:mr-3"}`}
+                size={24}
+              />
+              <span className="hidden sm:inline">
+                {!isCollapsed && "Back Home"}
+              </span>
+            </NavLink>
       </div>
       <div className="flex-1">
         <Outlet />

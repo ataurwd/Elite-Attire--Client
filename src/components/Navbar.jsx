@@ -115,9 +115,9 @@ const NavBer = () => {
               <Link
                   to={`${
                     loginUser.role === "admin"
-                      ? "/dashboard/admin-profile"
+                      ? "/dashboard/manage-order"
                       : loginUser.role === "user"
-                      ? "/dashboard/guide-profile" : ""
+                      ? "/dashboard/manage-profile" : ""
                   }`}
                   className={ "text-black"
                   }
