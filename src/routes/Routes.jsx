@@ -13,6 +13,8 @@ import ManageProduct from './../dashboard/admin/ManageProduct';
 import ViewCustomer from './../dashboard/admin/ViewCustomer';
 import ManageProfile from './../dashboard/user/ManageProfile';
 import OrderHistory from './../dashboard/user/OrderHistory';
+import Payment from "../payment/Payment";
+import StripePayment from "../payment/StripePayment";
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -39,6 +41,10 @@ const Routes = () => {
         {
           path: '/cart',
           element: <Cart />,
+        },
+        {
+          path: '/payment',
+          element: <StripePayment />,
         }
       ],
     },
