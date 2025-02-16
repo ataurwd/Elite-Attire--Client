@@ -10,15 +10,15 @@ const Payment = () => {
   const [clientSecrate, setClientSecrate] = useState("");
   const [loading, setLoading] = useState(false);
   const { user } = useContext(FormContext);
-  const stripe = useStripe()
-    const elements = useElements();
-    const navigate = useNavigate();
-    
-    const [userProduct] = useUserProduct();
-    const totalPayment = userProduct.reduce(
-      (sum, product) => sum + (product.item.price || 0),
-      0
-    );    
+  const stripe = useStripe();
+  const elements = useElements();
+  const navigate = useNavigate();
+
+  const [userProduct] = useUserProduct();
+  const totalPayment = userProduct.reduce(
+    (sum, product) => sum + (product.item.price || 0),
+    0
+  );
   useEffect(() => {
     axios
       .post(`${import.meta.env.VITE_URL}/stripe-payment-add`, {
@@ -41,7 +41,7 @@ const Payment = () => {
     }
 
     // Start loading when payment processing begins
-    setLoading(true); 
+    setLoading(true);
 
     try {
       const { error, paymentMethod } = await stripe.createPaymentMethod({
@@ -70,14 +70,41 @@ const Payment = () => {
         setLoading(false);
         return;
       }
-        console.log("Payment sucessfull", paymentIntent.created, paymentIntent.amount)
+      // console.log("Payment sucessfull", paymentIntent.created, paymentIntent.amount)
       if (paymentIntent.status === "succeeded") {
         Swal.fire({
           title: "Payment Successful",
           icon: "success",
           draggable: false,
         });
-          navigate("/cart")
+        const address = e.target.address.value;
+        const paymentInfor = {
+          paymentMethodId: paymentMethod.created,
+          amount: paymentIntent.amount,
+          userEmail: user?.email,
+          userName: user?.displayName,
+          address,
+        };
+        // To save payment information
+        try {
+          const res = await axios.post(
+            `${import.meta.env.VITE_URL}/payment`,
+            paymentInfor
+          );
+
+          if (res.data.insertedId) {
+            // If payment is successfully inserted, delete all orders for the user
+            await axios.delete(
+              `${import.meta.env.VITE_URL}/allProduct/${user?.email}`
+            );
+            console.log("Orders deleted successfully");
+          }
+        } catch (error) {
+          console.error("Error processing payment or deleting orders:", error);
+        }
+
+        // Navigate to order history page
+        navigate("/dashboard/order-hoistory");
       }
     } catch (err) {
       console.error("Payment processing error:", err);
@@ -130,13 +157,13 @@ const Payment = () => {
             htmlFor="name"
             className="block text-gray-700 font-medium mb-2"
           >
-            Cardholder Name
+            Shipping Address
           </label>
           <input
             type="text"
-            id="name"
+            name="address"
             className="w-full p-3 border rounded-md shadow-sm bg-gray-50 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="John Doe"
+            placeholder=" shipping address"
             required
           />
         </div>

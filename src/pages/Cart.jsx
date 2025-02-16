@@ -8,9 +8,10 @@ const Cart = () => {
   const totalPayment = userProduct.reduce(
     (sum, product) => sum + (product.item.price || 0),
     0
-  );
+    );
+    
   return (
-    <div className="px-20 mt-10">
+    <div className="px-20 my-10">
       <h2 className="text-3xl text-left mb-6">Cart</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column: Product List */}
@@ -61,8 +62,9 @@ const Cart = () => {
             <div className="my-4">
               <p className="text-lg text-gray-700">
                 Total Payment:{" "}
-                <span className="font-bold text-gray-900">${totalPayment}</span>
-              </p>
+                <span className="font-bold text-gray-900">${totalPayment.toFixed(2)}</span>
+                          </p>
+                          
               <div className="flex">
                 <Link to="/payment" className="btn bg-primary text-white mt-6 py-2 rounded-md transition duration-300">
                   Pay Now
