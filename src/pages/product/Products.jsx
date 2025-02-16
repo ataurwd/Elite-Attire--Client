@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { FormContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
+    const { user } = useContext(FormContext)
+    const navigate = useNavigate()
   // Fetch data from API using the "products" queryKey and the queryFn function
   const { data } = useQuery({
     queryKey: ["products"],
@@ -11,7 +15,17 @@ const Products = () => {
       return response.data;
     },
   });
-  console.log(data);
+
+  // add to cart list
+
+    const handleCart = (item) => {
+        if (!user) {
+            navigate("/login", { state: { from: "/products" } });
+            return;
+        }
+        const data = { item, userEmail: user?.email }
+        console.log(data)
+  };
   return (
     <div>
       <h1 className="text-center md:mt-10 mt-3 text-3xl font-bold text-text underline">
@@ -53,10 +67,17 @@ const Products = () => {
                 {item.description}
               </p>
               <p>${item.price}</p>
-              <div className="badge badge-outline">default</div>
+              <div className="badge badge-outline">{`${
+                item.quantity > 0 ? "In Stock" : "Out Of Stock"
+              }`}</div>
             </div>
             <div className="flex flex-wrap items-center justify-between gap-6 text-sm md:text-base">
-              <button className="rounded-lg bg-primary px-4 py-2 font-semibold text-white duration-300 hover:scale-95">
+              <button
+                onClick={() => handleCart(item)}
+                disabled={item.quantity <= 0}
+                className={`rounded-lg bg-primary px-4 py-2 font-semibold text-white duration-300 hover:scale-95 
+                ${item.quantity <= 0 ? "opacity-40 cursor-not-allowed" : ""}`}
+              >
                 Add to Cart
               </button>
             </div>

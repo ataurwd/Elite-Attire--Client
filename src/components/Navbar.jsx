@@ -3,13 +3,15 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { FormContext } from "../context/AuthContext";
 import { CiHeart } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
+import useLoginUser from "../hooks/useLoginUser";
 
 const NavBer = () => {
   const { user, logoutUser } = useContext(FormContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   //   const [loginUser] = useUser();
-
+  const [loginUser] = useLoginUser()
+  console.log(loginUser)
   const signOut = () => {
     logoutUser();
     navigate("/login");
@@ -71,33 +73,11 @@ const NavBer = () => {
         </ul>
       </div>
 
-      {/* Navbar End */}
-      {/* <div className="navbar-end space-x-2 ">
-        <Link to="/dashboard">
-          <div className=" relative">
-            <IoCartOutline className="border rounded-full text-4xl p-2 " />
-            {10 > 0 && (
-              <p className="absolute -top-[6px] -right-[7px] p-1 text-white flex items-center justify-center rounded-full h-5 w-5 bg-green-500 ">
-                {10}
-              </p>
-            )}
-          </div>
-        </Link>
-
-        <div className=" relative">
-          <CiHeart className="border rounded-full text-4xl p-2" />
-          {10 > 0 && (
-            <p className=" absolute -top-[6px] -right-[7px] p-1 text-white flex items-center justify-center  rounded-full h-5 w-5 bg-green-500 ">
-              {10}
-            </p>
-          )}
-        </div>
-      </div> */}
       <div className="navbar-end flex items-center space-x-4">
         {user ? (
           <>
             {" "}
-            <Link to="/dashboard">
+            <Link to="/cart">
               <div className=" relative">
                 <IoCartOutline className="border rounded-full text-4xl p-2 " />
                 {10 > 0 && (
@@ -132,19 +112,18 @@ const NavBer = () => {
             <div className="absolute top-12 right-0 md:-left-20 flex flex-col gap-2 w-48 bg-white p-3 shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
               <h3 className="text-sm font-semibold">{user?.displayName}</h3>
               <p className="text-xs text-gray-600">{user?.email}</p>
-              {/* <Link
+              <Link
                   to={`${
                     loginUser.role === "admin"
                       ? "/dashboard/admin-profile"
-                      : loginUser.role === "guide"
-                      ? "/dashboard/guide-profile"
-                      : "/dashboard/tourist-profile"
+                      : loginUser.role === "user"
+                      ? "/dashboard/guide-profile" : ""
                   }`}
                   className={ "text-black"
                   }
                 >
                   Dashboard
-                </Link> */}
+                </Link>
               <Link
                 to="/offer-announcements"
                 className="text-sm text-black hover:text-gray-700"

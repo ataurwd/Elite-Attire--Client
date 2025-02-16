@@ -6,6 +6,7 @@ import Login from "../users/Login";
 import Register from "../users/Register";
 import Home from "../pages/home/Home";
 import Products from "../pages/product/Products";
+import Cart from "../pages/Cart";
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -28,6 +29,10 @@ const Routes = () => {
         {
           path: '/products',
           element: <Products />,
+        },
+        {
+          path: '/cart',
+          element: <Cart />,
         }
       ],
     },

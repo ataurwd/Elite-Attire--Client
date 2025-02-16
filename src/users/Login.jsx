@@ -38,7 +38,7 @@ const Login = () => {
         const userInfo = {
           email: res.user.email,
           name: res.user.displayName,
-          role: "tourist",
+          role: "user",
           photo: res.user.photoURL,
         };
         // to post user data
