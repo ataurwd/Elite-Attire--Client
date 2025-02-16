@@ -15,6 +15,7 @@ import ManageProfile from './../dashboard/user/ManageProfile';
 import OrderHistory from './../dashboard/user/OrderHistory';
 import Payment from "../payment/Payment";
 import StripePayment from "../payment/StripePayment";
+import Wishlist from "../pages/Wishlist";
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -37,6 +38,10 @@ const Routes = () => {
         {
           path: '/products',
           element: <Products />,
+        },
+        {
+          path: '/wishlist',
+          element: <Wishlist />,
         },
         {
           path: '/cart',

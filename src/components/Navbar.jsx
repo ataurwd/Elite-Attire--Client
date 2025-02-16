@@ -6,6 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import useLoginUser from "../hooks/useLoginUser";
 import useAllProduct from './../hooks/useAllProduct';
 import useUserProduct from "../hooks/useUserProduct";
+import useAllWishlist from "../hooks/useAllWishlist";
 
 const NavBer = () => {
   const { user, logoutUser } = useContext(FormContext);
@@ -15,7 +16,7 @@ const NavBer = () => {
   const [product] = useAllProduct();
 
   // login user product
-  const [userProduct] = useUserProduct()
+  const [userProduct, wishlistData] = useUserProduct()
 
   const signOut = () => {
     logoutUser();
@@ -93,14 +94,14 @@ const NavBer = () => {
               </div>
             </Link>
             {/* wishlist  */}
-            <div className=" relative">
+            <Link to="/wishlist" className=" relative">
               <CiHeart className="border rounded-full text-4xl p-2" />
-              {10 > 0 && (
+              {wishlistData.length > 0 && (
                 <p className=" absolute -top-[6px] -right-[7px] p-1 text-white flex items-center justify-center text-sm rounded-full h-5 w-5 bg-primary">
-                  {10}
+                  {wishlistData.length}
                 </p>
               )}
-            </div>
+            </Link>
           </>
         ) : (
           <></>
