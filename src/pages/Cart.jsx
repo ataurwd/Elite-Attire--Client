@@ -21,7 +21,7 @@ const Cart = () => {
     0
   );
 
-  const payAmmount = totalPayment?.toFixed(2) 
+  const payAmmount = Number(totalPayment || 0).toFixed(2);
   // to delete card item
 
   const handleDeleteProduct = async (id) => {
@@ -205,10 +205,11 @@ const Cart = () => {
                                 Name
                               </label>
                               <input
-                                value={user?.displayName}
+                                defaultValue={user?.displayName}
                                 name="name"
                                 className="bg-transparent flex h-10 w-full rounded-md border px-3"
                                 placeholder="Enter your name"
+                                readOnly
                               />
                             </div>
                             <div className="space-y-2">
@@ -219,7 +220,8 @@ const Cart = () => {
                                 name="email"
                                 className="bg-transparent flex h-10 w-full rounded-md border px-3"
                                 placeholder=""
-                                value={user.email}
+                                defaultValue={user.email}
+                                readOnly
                               />
                             </div>
                             <div className="space-y-2">
