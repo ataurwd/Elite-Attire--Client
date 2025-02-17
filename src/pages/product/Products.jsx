@@ -93,7 +93,7 @@ const Products = () => {
                 width={400}
                 height={500}
                 className="rounded-lg bg-black/40 object-center h-80"
-                src={item.image_url}
+                src={item.image_url || item.image}
                 alt="card navigate ui"
               />
             </div>

@@ -21,6 +21,7 @@ const Cart = () => {
     0
   );
 
+  const payAmmount = totalPayment?.toFixed(2) 
   // to delete card item
 
   const handleDeleteProduct = async (id) => {
@@ -58,7 +59,7 @@ const Cart = () => {
     const email = form.email.value;
     const address = form.address.value;
     const status = "pending";
-    const formdata = {name, email, address, amount: parseInt(totalPayment.toFixed(2)), status};
+    const formdata = {name, email, address, amount: totalPayment, status};
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/payment`,
@@ -99,7 +100,7 @@ const Cart = () => {
                   {/* Image Section */}
                   <div className="flex justify-center">
                     <img
-                      src={product.item.image_url}
+                      src={product.item.image_url || product.item.image}
                       alt={product.item.product_name}
                       className="h-32 w-32 object-cover rounded-md"
                     />
@@ -150,7 +151,7 @@ const Cart = () => {
                   <p className="text-lg text-gray-700">
                     Total Payment:{" "}
                     <span className="font-bold text-gray-900">
-                      ${totalPayment.toFixed(2)}
+                      ${payAmmount}
                     </span>
                   </p>
 

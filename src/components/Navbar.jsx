@@ -4,7 +4,7 @@ import { FormContext } from "../context/AuthContext";
 import { CiHeart } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import useLoginUser from "../hooks/useLoginUser";
-import useAllProduct from './../hooks/useAllProduct';
+import useAllProduct from "./../hooks/useAllProduct";
 import useUserProduct from "../hooks/useUserProduct";
 import useAllWishlist from "../hooks/useAllWishlist";
 
@@ -12,11 +12,11 @@ const NavBer = () => {
   const { user, logoutUser } = useContext(FormContext);
   const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
-  const [loginUser] = useLoginUser()
+  const [loginUser] = useLoginUser();
   const [product] = useAllProduct();
 
   // login user product
-  const [userProduct, wishlistData] = useUserProduct()
+  const [userProduct, wishlistData] = useUserProduct();
 
   const signOut = () => {
     logoutUser();
@@ -76,6 +76,18 @@ const NavBer = () => {
           >
             Product
           </NavLink>
+          <Link
+            to={`${
+              loginUser.role === "admin"
+                ? "/dashboard/manage-order"
+                : loginUser.role === "user"
+                ? "/dashboard/manage-profile"
+                : ""
+            }`}
+            className={"text-white"}
+          >
+            Dashboard
+          </Link>
         </ul>
       </div>
 
@@ -109,41 +121,14 @@ const NavBer = () => {
 
         {user ? (
           <div className="relative group">
-            <img
-              src={user?.photoURL || "/default-profile.png"}
-              className="rounded-full w-10 h-10 cursor-pointer object-cover"
-              alt="User"
-              referrerPolicy="no-referrer"
-            />
-            <div className="absolute top-12 right-0 md:-left-20 flex flex-col gap-2 w-48 bg-white p-3 shadow-lg rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
-              <h3 className="text-sm font-semibold">{user?.displayName}</h3>
-              <p className="text-xs text-gray-600">{user?.email}</p>
-              <Link
-                  to={`${
-                    loginUser.role === "admin"
-                      ? "/dashboard/manage-order"
-                      : loginUser.role === "user"
-                      ? "/dashboard/manage-profile" : ""
-                  }`}
-                  className={ "text-black"
-                  }
-                >
-                  Dashboard
-                </Link>
-              <Link
-                to="/offer-announcements"
-                className="text-sm text-black hover:text-gray-700"
-              >
-                Offer Announcements
-              </Link>
+
               <button
                 onClick={signOut}
-                className="text-sm text-white bg-primary py-1 rounded-sm hover:bg-danger"
+                className="text-sm text-white bg-primary px-5 py-2 rounded-sm hover:bg-danger"
               >
                 Logout
               </button>
             </div>
-          </div>
         ) : (
           <>
             <Link to="/login">
@@ -167,7 +152,7 @@ const NavBer = () => {
             <NavLink
               to="/"
               className={({ isActive }) =>
-                isActive ? "text-primary" : "text-white"
+                isActive ? "text-primary" : "text-black"
               }
             >
               Home
@@ -175,37 +160,28 @@ const NavBer = () => {
             <NavLink
               to="/products"
               className={({ isActive }) =>
-                isActive ? "text-primary" : "text-white"
+                isActive ? "text-primary" : "text-black"
               }
             >
               Product
             </NavLink>
             {user && (
               <>
-                {/* <Link
+              <Link
                   to={`${
                     loginUser.role === "admin"
-                      ? "/dashboard/admin-profile"
-                      : loginUser.role === "guide"
-                      ? "/dashboard/guide-profile"
-                      : "/dashboard/tourist-profile"
+                      ? "/dashboard/manage-order"
+                      : loginUser.role === "user"
+                      ? "/dashboard/manage-profile" : ""
                   }`}
-                  className={ "text-gray-400"
+                  className={ "text-black"
                   }
                 >
                   Dashboard
-                </Link> */}
-                <NavLink
-                  to="/offer-announcements"
-                  className={({ isActive }) =>
-                    isActive ? "text-gray-400" : "text-black"
-                  }
-                >
-                  Offer Announcements
-                </NavLink>
+                </Link>
                 <button
                   onClick={signOut}
-                  className="text-red-500 text-sm hover:underline"
+                  className="text-red-500 text-left text-sm hover:underline"
                 >
                   Logout
                 </button>
