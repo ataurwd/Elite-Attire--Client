@@ -17,6 +17,7 @@ import Payment from "../payment/Payment";
 import StripePayment from "../payment/StripePayment";
 import Wishlist from "../pages/Wishlist";
 import AddProduct from "../dashboard/admin/AddProduct";
+import UpdateProduct from './../dashboard/admin/UpdateProduct';
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -81,7 +82,12 @@ const Routes = () => {
         {
           path: 'add-product',
           element: <AddProduct/>,
-        }
+        },
+        {
+          path: 'manage-product/update/:id',
+          element: <UpdateProduct />,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_URL}/products/${params.id}`)
+        },
       ]
     }
   ]);

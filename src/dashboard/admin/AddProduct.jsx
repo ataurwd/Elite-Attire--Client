@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const AddProduct = () => {
+    const navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     product_name: "",
     category: "",
@@ -68,7 +71,8 @@ const AddProduct = () => {
         title: "Product Added Sucessfully!",
         icon: "success",
       });
-    }
+      }
+      navigate("/dashboard/manage-product");
   };
 
   return (
