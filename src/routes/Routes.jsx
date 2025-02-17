@@ -16,6 +16,7 @@ import OrderHistory from './../dashboard/user/OrderHistory';
 import Payment from "../payment/Payment";
 import StripePayment from "../payment/StripePayment";
 import Wishlist from "../pages/Wishlist";
+import AddProduct from "../dashboard/admin/AddProduct";
 
 const Routes = () => {
   const route = createBrowserRouter([
@@ -77,6 +78,10 @@ const Routes = () => {
           path: 'order-hoistory',
           element: <OrderHistory/>,
         },
+        {
+          path: 'add-product',
+          element: <AddProduct/>,
+        }
       ]
     }
   ]);

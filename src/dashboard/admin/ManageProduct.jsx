@@ -23,7 +23,7 @@ const ManageProduct = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((user, index) => (
+            {data?.map((user, index) => (
               <tr key={user._id} className="hover:bg-gray-100">
                 <td className="p-3 border">
                  {index + 1}

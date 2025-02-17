@@ -20,7 +20,7 @@ const Login = () => {
     loginUser(email, password)
       .then((res) => {
         const user = res.user;
-        navigate(location?.state ? location.state : "/");
+        navigate("/");
       })
       .catch((er) => {
         toast.error(er.message);
@@ -34,7 +34,7 @@ const Login = () => {
           title: "sucessfully login",
           icon: "success"
         });
-        navigate(location?.state ? location.state : "/");
+        navigate("/");
         const userInfo = {
           email: res.user.email,
           name: res.user.displayName,

@@ -54,6 +54,22 @@ const Dashoboard = () => {
               </span>
             </NavLink>
             <NavLink
+              to={"add-product"}
+              className={({ isActive }) =>
+                `flex bg-white my-2 p-3 rounded-md items-center ${
+                  isActive ? "text-primary" : "text-black"
+                } ${isCollapsed ? "justify-center" : "md:ml-5"}`
+              }
+            >
+              <CgProfile
+                className={`${isCollapsed ? "" : "md:mr-3"}`}
+                size={24}
+              />
+              <span className="hidden sm:inline">
+                {!isCollapsed && "Add Product"}
+              </span>
+            </NavLink>
+            <NavLink
               to={"manage-order"}
               className={({ isActive }) =>
                 `flex bg-white my-2 p-3 rounded-md items-center ${
