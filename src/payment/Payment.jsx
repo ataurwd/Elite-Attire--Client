@@ -96,7 +96,7 @@ const Payment = () => {
           if (res.data.insertedId) {
             // If payment is successfully inserted, delete all orders for the user
             await axios.delete(
-              `${import.meta.env.VITE_URL}/allProduct/${user?.email}`
+              `${import.meta.env.VITE_URL}/allProduct/email/${user?.email}`
             );
             console.log("Orders deleted successfully");
           }

@@ -17,7 +17,7 @@ const Register = () => {
   const handelRegister = (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const photoURL = e.target.photo.value;
+    // const photoURL = e.target.photo.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
 
@@ -55,7 +55,7 @@ const Register = () => {
           email: res?.user?.email, // Use the email from the registered user
           name: name,
           role: "user",
-          photo: photoURL,
+          // photo: photoURL,
         };
 
         // Post user data
@@ -77,11 +77,11 @@ const Register = () => {
         // Update user profile in Firebase
         const profile = {
           displayName: name,
-          photoURL: photoURL,
+          // photoURL: photoURL,
         };
         updateProfile(auth.currentUser, profile).then(() => {
           setUser((prev) => {
-            return { ...prev, displayName: name, photoURL: photoURL };
+            return { ...prev, displayName: name };
           });
         });
         setUser(res.user);
@@ -127,12 +127,12 @@ const Register = () => {
                 className="text-sm font-medium leading-none text-zinc-700 dark:text-zinc-300"
                 htmlFor="photo"
               >
-                Photo URL
+                Phone Number
               </label>
               <input
                 className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none dark:border-zinc-700"
                 id="photo"
-                placeholder="Photo URL"
+                placeholder="Phone Number"
                 name="photo"
                 type="text"
                 required
