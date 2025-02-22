@@ -14,12 +14,14 @@ const Cart = () => {
   const navigate = useNavigate()
   const [payment, reFetch, isLoading] = useAllPayment()
 
+  console.log(userProduct[0])
 
 
   const totalPayment = userProduct.reduce(
-    (sum, product) => sum + (product.item.price || 0),
+    (sum, product) => sum + parseInt(product.item.price),
     0
   );
+  console.log(totalPayment)
 
   const payAmmount = Number(totalPayment || 0).toFixed(2);
   // to delete card item
@@ -59,7 +61,8 @@ const Cart = () => {
     const email = form.email.value;
     const address = form.address.value;
     const status = "pending";
-    const formdata = {name, email, address, amount: totalPayment, status};
+    const paymentMethodId = Math.floor(100000000 + Math.random() * 900000000);
+    const formdata = {email, address, amount: totalPayment, status, userName: name, paymentMethodId};
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_URL}/payment`,
@@ -109,7 +112,7 @@ const Cart = () => {
                   {/* Product Info */}
                   <div className="flex flex-col space-y-2">
                     <h3 className="text-lg font-semibold text-gray-800">
-                      {product.item.product_name}
+                      {product.item.productName}
                     </h3>
                     <p className="text-gray-600 text-sm">
                       Price:{" "}

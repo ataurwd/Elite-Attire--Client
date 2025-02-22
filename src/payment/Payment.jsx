@@ -16,7 +16,7 @@ const Payment = () => {
 
   const [userProduct] = useUserProduct();
   const totalPayment = userProduct.reduce(
-    (sum, product) => sum + (product.item.price || 0),
+    (sum, product) => sum + parseInt(product.item.price),
     0
   );
   useEffect(() => {

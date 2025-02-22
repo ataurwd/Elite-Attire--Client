@@ -42,7 +42,7 @@ const ManageProfile = () => {
       <h1 className="text-3xl font-bold mb-4">Welcome, {user?.displayName}!</h1>
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md text-center">
         <img
-          src={user?.photoURL}
+          src={user?.photoURL || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVz_XdPamId2_uvEeLG23zjW02eAXgZhCfoQ&s"}
           alt="User"
           className="w-32 h-32 rounded-full mx-auto mb-4"
         />

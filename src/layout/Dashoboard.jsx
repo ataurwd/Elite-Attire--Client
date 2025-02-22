@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { NavLink, Outlet } from "react-router-dom";
-import { CgProfile } from "react-icons/cg";
+import { CgHome, CgProfile } from "react-icons/cg";
 import useLoginUser from "../hooks/useLoginUser";
 import Loading from "./../components/Loading";
+import { FaOpencart } from "react-icons/fa";
+import { IoBagAddOutline, IoHomeOutline } from "react-icons/io5";
+import { AiOutlineProduct } from "react-icons/ai";
+import { MdOutlineManageHistory } from "react-icons/md";
+import { LuUsersRound } from "react-icons/lu";
+
 
 const Dashoboard = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -45,7 +51,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <AiOutlineProduct
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />
@@ -61,7 +67,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <IoBagAddOutline
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />
@@ -77,7 +83,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <MdOutlineManageHistory
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />
@@ -93,7 +99,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <LuUsersRound 
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />
@@ -128,7 +134,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <FaOpencart 
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />
@@ -148,7 +154,7 @@ const Dashoboard = () => {
                 } ${isCollapsed ? "justify-center" : "md:ml-5"}`
               }
             >
-              <CgProfile
+              <IoHomeOutline
                 className={`${isCollapsed ? "" : "md:mr-3"}`}
                 size={24}
               />

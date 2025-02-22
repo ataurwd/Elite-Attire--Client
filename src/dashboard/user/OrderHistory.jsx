@@ -1,13 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import useAllPayment from './../../hooks/useAllPayment';
 import Loading from './../../components/Loading';
+import { FormContext } from './../../context/AuthContext';
 
 const OrderHistory = () => {
   const [payment, reFetch, isLoading] = useAllPayment()
+  const {user} = useContext(FormContext)
   
   if (isLoading) {
     return <Loading/>
   }
+
+
+  const userData = payment.filter(item => item.userEmail || item.email == user.email)
+  console.log(userData)
     return (
         <div className="overflow-x-auto md:p-5">
       <table className="min-w-full border-collapse border border-gray-300">
@@ -22,7 +28,7 @@ const OrderHistory = () => {
           </tr>
         </thead>
         <tbody>
-          {payment?.map((payment, index) => (
+          {userData?.map((payment, index) => (
             <tr key={payment._id} className="text-center">
               <td className="border border-gray-300 px-4 py-2">{index + 1}</td>
               <td className="border border-gray-300 px-4 py-2">${payment.amount}</td>
